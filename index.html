@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            margin-top: 50px;
+        }
+        .game-section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: rgb(69, 61, 225);
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        /* Popup styles */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            border-radius: 8px;
+            width: 300px;
+        }
+        #popup h2 {
+            margin-top: 0;
+        }
+        /* Ensure blur is only applied when popup is active */
+        .blurred {
+            filter: blur(5px);
+        }
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>Welcome to the Games Hub</h1>
+        <p>Select a game to play:</p>
+        
+        <button><a href="hub.html">Play wordly</a></button>
+        <br>
+        <button><a href="contactus.html">Contact Us</a></button>
+        <button><a href="how_to_play.html">Login</a></button>
+        <br><br>
+        <button><a href="how_to_play.html">How to Play</a></button>
+
+        <!-- Beta Access Button -->
+        <button onclick="showPopup()">Beta Access</button>
+
+        <div id="wordly" class="game-section">
+            <h2>Wordly Game</h2>
+            <button onclick="showGame()">Back to Menu</button>
+        </div>
+
+        <div id="horror" class="game-section">
+            <h2>Horror Game</h2>
+            <button onclick="showGame()">Back to Menu</button>
+        </div>
+
+        <div id="another" class="game-section">
+            <h2>Another Game</h2>
+            <button onclick="showGame()">Back to Menu</button>
+        </div>
+    </div>
+
+    <!-- Updated Beta Access Popup -->
+    <div id="popup-overlay"></div>
+    <div id="popup">
+        <h2>Enter Beta Access ID and Password</h2>
+        <input type="text" id="accessId" placeholder="ID" required>
+        <br><br>
+        <input type="password" id="accessPassword" placeholder="Password" required>
+        <br><br>
+        <button onclick="checkAccess()">Submit</button>
+        <button onclick="hidePopup()">Cancel</button>
+    </div>
+
+    <script>
+        // List of allowed IDs and passwords (30 IDs and passwords)
+        const betaMembers = {
+            "naviya": "naviya12341", "vedant": "01052006", "user3": "password789",
+            "user4": "password101", "user5": "password112", "user6": "password131",
+            "user7": "password415", "user8": "password161", "user9": "password718",
+            "user10": "password192", "user11": "password202", "user12": "password212",
+            "user13": "password232", "user14": "password242", "user15": "password252",
+            "user16": "password262", "user17": "password272", "user18": "password282",
+            "user19": "password292", "user20": "password303", "user21": "password313",
+            "user22": "password323", "user23": "password333", "user24": "password343",
+            "user25": "password353", "user26": "password363", "user27": "password373",
+            "user28": "password383", "user29": "password393", "user30": "password404"
+        };
+
+        function showGame(game) {
+            document.querySelectorAll('.game-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            if (game) {
+                document.getElementById(game).classList.add('active');
+            }
+        }
+
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("popup-overlay").style.display = "block";
+            document.getElementById("content").classList.add("blurred");
+        }
+
+        function hidePopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("popup-overlay").style.display = "none";
+            document.getElementById("content").classList.remove("blurred");
+        }
+
+        function checkAccess() {
+            const accessId = document.getElementById("accessId").value;
+            const accessPassword = document.getElementById("accessPassword").value;
+
+            // Check if the entered ID and password match
+            if (betaMembers[accessId] === accessPassword) {
+                // Redirect to the beta members page if credentials are correct
+                window.location.href = "beta_members.html";
+            } else {
+                alert("Incorrect ID or password. Access denied.");
+            }
+        }
+    </script>
+
+    <br><br><br><br><br><br><br><br><br><br>
+
+    <a href="privacy_policy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+</body>
+</html>
